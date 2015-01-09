@@ -3,15 +3,17 @@
  * Plugin Name: Acknowledge Me
  * Description: Shows contributors to a Github repo
  * Version:     0.0.1
- * Author:      Josh Pollock
- * Author URI:  http://JoshPress.net
+ * Author:      Pods Framework Team
+ * Author URI:  http://pods.io
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 /**
+ * A Community Building Tool By Pods
+ *
  * Based on the code for the underscores.me site: https://github.com/Automattic/underscores.me/, which is copyright Automattic, hugobaeta, kovshenin and GPL licensed.
  *
- * This plugin copyright 2015 Josh Pollock. Licensed under the terms of the GPL v2 or later.
+ * This plugin copyright 2015 Pods Foundation LLC. Licensed under the terms of the GPL v2 or later.
  */
 
 /**
