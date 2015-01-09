@@ -92,6 +92,8 @@ function acknowledge_me_get( $owner, $repo, $total = 100 ) {
 
 /**
  * Adds a shortcode for this
+ *
+ * @since 0.0.1
  */
 add_shortcode( 'acknowledge_me', 'acknowledge_me_shortcode' );
 function acknowledge_me_shortcode( $atts ) {
@@ -106,6 +108,8 @@ function acknowledge_me_shortcode( $atts ) {
 
 /**
  * Add CSS for this
+ *
+ * @since 0.0.1
  */
 add_action( 'wp_enqueue_scripts', 'acknowledge_me_css' );
 function acknowledge_me_css() {
