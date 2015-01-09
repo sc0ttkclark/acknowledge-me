@@ -1,0 +1,13 @@
+{
+    "name": "shelob9/acknowledge_me",
+    "description": "Shows contributors to a Github repo",
+    "license": "GPL v2+",
+    "authors": [
+        {
+            "name": "Josh Pollock",
+            "email": "Josh@JoshPress.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
