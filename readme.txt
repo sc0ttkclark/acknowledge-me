@@ -8,7 +8,7 @@ Stable tag: 0.1.0
 License: GPL v2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Shows contributors to a Github repo
+Shows contributors to a Github repo, retrieved via the GitHub API.
 
 == Description ==
 A Community Building Tool By [Pods](http://pods.io/pods)

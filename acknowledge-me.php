@@ -26,34 +26,42 @@
  * @param string $repo Repo name
  * @param bool|string $header_text Optional text to output before the contributors
  * @param int $total Optional. Total number of contributors to show. Default is 100.
+ *
+ * @returns string Rendered output
  */
 function acknowledge_me_display( $owner, $repo, $header_text = false, $total = 100 ) {
 	$contributors = acknowledge_me_get( $owner, $repo, $total );
 	if ( ! is_array( $contributors ) || empty( $contributors ) ) {
 		return;
 	}
-	?>
-	<section id="contribute">
-			<div class="wrap">
-				<?php
-					if( $header_text ) {
-						printf( '<div id="header-text">%1s</div>', $header_text );
-					}
-				?>
-				<ul id="team">
-					<?php foreach ( $contributors as $contributor ) : ?>
-						<?php
-						$title = sprintf( '@%s with %d %s', $contributor->login, $contributor->contributions, _n( 'contribution', 'contributions', $contributor->contributions ) );
-						$url = sprintf( 'http://github.com/%s', $contributor->login );
-						$avatar_url = add_query_arg( 's', 280, $contributor->avatar_url );
-						$avatar_url = add_query_arg( 'd', esc_url_raw( 'https://secure.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=280' ), $avatar_url );
-						?>
-						<li><a title="<?php echo esc_attr( $title ); ?>" href="<?php echo esc_url( $url ); ?>"><img class="avatar" src="<?php echo esc_url( $avatar_url ); ?>" /></a></li>
-					<?php endforeach; ?>
-				</ul><!-- #team -->
+
+	$out[] =
+		'<section id="contribute">
+			<div class="wrap">';
+
+	if ( is_string( $header_text ) ) {
+		$out[] = sprintf( '<div id="header-text">%1s</div>', $header_text );
+	}
+
+	$out[] = '<ul id="team">';
+	foreach ( $contributors as $contributor ) {
+
+		$title      = sprintf( '@%s with %d %s', $contributor->login, $contributor->contributions, _n( 'contribution', 'contributions', $contributor->contributions ) );
+		$url        = sprintf( 'http://github.com/%s', $contributor->login );
+		$avatar_url = add_query_arg( 's', 280, $contributor->avatar_url );
+		$avatar_url = add_query_arg( 'd', esc_url_raw( 'https://secure.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=280' ), $avatar_url );
+		$out[]      = sprintf( '<li><a title="%1s" href="%2s"><img class="avatar" src="%3s" /></a></li>', esc_attr( $title ), esc_url( $url ), esc_url( $avatar_url ) );
+	}
+	$out[] = '</ul><!-- #team -->
 			</div><!-- .wrap -->
-	</section><!-- #contribute -->
-<?php }
+	</section><!-- #contribute -->';
+
+	if ( is_array( $out ) ) {
+		return implode( '', $out );
+
+	}
+
+}
 
 /**
  * Get contributors
@@ -82,6 +90,7 @@ function acknowledge_me_get( $owner, $repo, $total = 100 ) {
 		return array();
 
 	}
+
 	$contributors = json_decode( wp_remote_retrieve_body( $response ) );
 	if ( ! is_array( $contributors ) ) {
 		return array();
@@ -104,11 +113,12 @@ function acknowledge_me_shortcode( $atts ) {
 	$atts = shortcode_atts( array(
 		'owner' => 'pods-framework',
 		'repo' => 'pods',
-		'header-text' => '',
+		'header_text' => '',
 		'total' => '100'
 	), $atts, 'acknowledge_me' );
 
-	return acknowledge_me_display( $atts[ 'owner' ], $atts[ 'repo' ], $atts[ 'header-text' ], $atts[ 'total'] );
+	return acknowledge_me_display( $atts[ 'owner' ], $atts[ 'repo' ], $atts[ 'header_text' ], $atts[ 'total'] );
+
 }
 
 /**
