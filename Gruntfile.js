@@ -148,7 +148,7 @@ module.exports = function (grunt) {
 	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
 	grunt.registerTask( 'do_git', [ 'gitcommit', 'gittag', 'gitpush' ] );
 
-	grunt.registerTask( 'release', [ 'pre_vcs', 'do_svn', 'clean:post_build' ] );
+	grunt.registerTask( 'release', [ 'pre_vcs', 'do_svn', 'do_git', 'clean:post_build' ] );
 
 
 };
