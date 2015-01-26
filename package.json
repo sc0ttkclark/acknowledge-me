@@ -1,7 +1,7 @@
 {
   "name": "acknowledge-me",
-  "version": "0.2.1",
-  "last_version": "0.2.0",
+  "version": "0.2.2",
+  "last_version": "0.2.1",
   "repository": "https://github.com/pods-framework/acknowledge-me",
   "devDependencies": {
     "grunt": "^0.4.5",
