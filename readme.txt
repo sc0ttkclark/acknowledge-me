@@ -1,10 +1,10 @@
 === Acknowledge Me ===
-Contributors: Shows contributors to a Github repo
+Contributors: Shelob9
 Tags: github, contributors, acknowledgment, pods
 Donate link: http://pods.io
 Requires at least: 3.8.0
 Tested up to: 4.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPL v2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 

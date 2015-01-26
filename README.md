@@ -12,3 +12,5 @@ Or use shortcode `[acknowledge_me owner="pods-framework" repo="pods" header-text
 Based on the code for the underscores.me site: https://github.com/Automattic/underscores.me/, which is copyright Automattic, hugobaeta, kovshenin and GPL licensed.
 
 This plugin copyright 2015 Pods Foundation LLC. Licensed under the terms of the GPL v2 or later.
+
+0.1.2
