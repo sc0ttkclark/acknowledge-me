@@ -98,7 +98,7 @@ module.exports = function (grunt) {
 					allowEmpty: true
 				},
 				files: {
-					src: [ 'acknowledge-me.php', 'readme.txt', 'README.md' ]
+					src: [ 'acknowledge-me.php', 'readme.txt', 'README.md', 'package.json' ]
 				}
 			}
 		},
