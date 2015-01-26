@@ -13,4 +13,4 @@ Based on the code for the underscores.me site: https://github.com/Automattic/und
 
 This plugin copyright 2015 Pods Foundation LLC. Licensed under the terms of the GPL v2 or later.
 
-0.1.2
+0.1.4

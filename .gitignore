@@ -1,2 +1,6 @@
 /vendor/
 node_modules
+.build
+release/acknowledge-me/.svn
+release/acknowledge-me
+release/build

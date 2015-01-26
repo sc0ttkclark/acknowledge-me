@@ -5,6 +5,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-git' );
 	grunt.loadNpmTasks( 'grunt-text-replace' );
+	grunt.loadNpmTasks( 'grunt-svn-checkout' );
+	grunt.loadNpmTasks( 'grunt-push-svn' );
 
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
@@ -25,6 +27,40 @@ module.exports = function (grunt) {
 					'!.gitmodules'
 				],
 				dest: 'release/build/<%= pkg.version %>/'
+			},
+			svn_trunk: {
+				options : {
+					mode :true
+				},
+				src:  [
+					'**',
+					'!node_modules/**',
+					'!release/**',
+					'!.git/**',
+					'!.sass-cache/**',
+					'!Gruntfile.js',
+					'!package.json',
+					'!.gitignore',
+					'!.gitmodules'
+				],
+				dest: 'release/<%= pkg.name %>/trunk/'
+			},
+			svn_tag: {
+				options : {
+					mode :true
+				},
+				src:  [
+					'**',
+					'!node_modules/**',
+					'!release/**',
+					'!.git/**',
+					'!.sass-cache/**',
+					'!Gruntfile.js',
+					'!package.json',
+					'!.gitignore',
+					'!.gitmodules'
+				],
+				dest: 'release/<%= pkg.name %>/tags/<%= pkg.version %>/'
 			}
 		},
 		compress: {
@@ -47,10 +83,25 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		gitpush: {
-			push_tag: {
+		gitcommit: {
+			commit: {
 				options: {
-					tags: true
+					message: 'Version <%= pkg.version %>',
+					noVerify: true,
+					noStatus: false,
+					allowEmpty: true
+				},
+				files: {
+					src: [ 'acknowledge-me.php', 'readme.txt', 'README.md' ]
+				}
+			}
+		},
+		gitpush: {
+			push: {
+				options: {
+					tags: true,
+					remote: 'orgin',
+					branch: 'master'
 				}
 			}
 		},
@@ -63,13 +114,35 @@ module.exports = function (grunt) {
 					to: "<%= pkg.version %>"
 				}]
 			}
-		}
+		},
+		svn_checkout: {
+			make_local: {
+				repos: [
+					{
+						path: [ 'release' ],
+						repo: 'http://plugins.svn.wordpress.org/acknowledge-me'
+					}
+				]
+			}
+		},
+		push_svn: {
+			options: {
+				remove: true,
 
+			},
+			main: {
+				src: 'release/<%= pkg.name %>',
+				dest: 'http://plugins.svn.wordpress.org/acknowledge-me',
+				tmp: './.build'
+			}
+		}
 	});
 
+	grunt.registerTask( 'pre_vcs', [ 'replace:version', 'clean', 'copy:main', 'compress' ] );
+	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
+	grunt.registerTask( 'do_git', [ 'gitcommit', 'gittag', 'gitpush' ] );
 
-
-	grunt.registerTask( 'build', [ 'clean', 'copy', 'compress', 'gittag', 'gitpush' ] );
+	grunt.registerTask( 'build', [ 'pre_vcs', 'do_svn' ] );
 
 
 };
