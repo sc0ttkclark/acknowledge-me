@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 			push: {
 				options: {
 					tags: true,
-					remote: 'orgin',
+					remote: 'origin',
 					branch: 'master'
 				}
 			}
