@@ -9,6 +9,18 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks( 'grunt-push-svn' );
 	grunt.loadNpmTasks( 'grunt-remove' );
 
+	copy_files = [
+		'**',
+		'!node_modules/**',
+		'!release/**',
+		'!.git/**',
+		'!.sass-cache/**',
+		'!Gruntfile.js',
+		'!package.json',
+		'!.gitignore',
+		'!.gitmodules'
+	];
+
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
 		clean: {
@@ -21,51 +33,21 @@ module.exports = function (grunt) {
 		},
 		copy: {
 			main: {
-				src:  [
-					'**',
-					'!node_modules/**',
-					'!release/**',
-					'!.git/**',
-					'!.sass-cache/**',
-					'!Gruntfile.js',
-					'!package.json',
-					'!.gitignore',
-					'!.gitmodules'
-				],
+				src:  copy_files,
 				dest: 'release/build/<%= pkg.version %>/'
 			},
 			svn_trunk: {
 				options : {
 					mode :true
 				},
-				src:  [
-					'**',
-					'!node_modules/**',
-					'!release/**',
-					'!.git/**',
-					'!.sass-cache/**',
-					'!Gruntfile.js',
-					'!package.json',
-					'!.gitignore',
-					'!.gitmodules'
-				],
+				src: copy_files,
 				dest: 'release/<%= pkg.name %>/trunk/'
 			},
 			svn_tag: {
 				options : {
 					mode :true
 				},
-				src:  [
-					'**',
-					'!node_modules/**',
-					'!release/**',
-					'!.git/**',
-					'!.sass-cache/**',
-					'!Gruntfile.js',
-					'!package.json',
-					'!.gitignore',
-					'!.gitmodules'
-				],
+				src: copy_files,
 				dest: 'release/<%= pkg.name %>/tags/<%= pkg.version %>/'
 			}
 		},
