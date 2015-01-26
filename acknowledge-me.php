@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Acknowledge Me
  * Description: Shows contributors to a Github repo
- * Version:     0.1.5
+ * Version:     0.2.0
  * Author:      Pods Framework Team
  * Author URI:  http://pods.io
  * License:     GPL-2.0+
@@ -18,8 +18,6 @@
 
 /**
  * Output the contributors
- *
- * @since 0.1.4 <!-
  *
  * @since 0.0.1
  *

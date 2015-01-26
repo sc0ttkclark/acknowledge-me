@@ -7,11 +7,17 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks( 'grunt-text-replace' );
 	grunt.loadNpmTasks( 'grunt-svn-checkout' );
 	grunt.loadNpmTasks( 'grunt-push-svn' );
+	grunt.loadNpmTasks( 'grunt-remove' );
 
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
 		clean: {
-			main: ['release/<%= pkg.version %>']
+			post_build: [
+				'.build',
+				'release/<%= pkg.name %>',
+				'release/build/<%= pkg.version %>',
+				'release/build/'
+			]
 		},
 		copy: {
 			main: {
@@ -138,11 +144,11 @@ module.exports = function (grunt) {
 		}
 	});
 
-	grunt.registerTask( 'pre_vcs', [ 'replace:version', 'clean', 'copy:main', 'compress' ] );
+	grunt.registerTask( 'pre_vcs', [ 'replace:version', 'copy:main', 'compress' ] );
 	grunt.registerTask( 'do_svn', [ 'svn_checkout', 'copy:svn_trunk', 'copy:svn_tag', 'push_svn' ] );
 	grunt.registerTask( 'do_git', [ 'gitcommit', 'gittag', 'gitpush' ] );
 
-	grunt.registerTask( 'build', [ 'pre_vcs', 'do_svn' ] );
+	grunt.registerTask( 'release', [ 'pre_vcs', 'do_svn', 'clean:post_build' ] );
 
 
 };
