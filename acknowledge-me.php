@@ -49,7 +49,7 @@ function acknowledge_me_display( $owner, $repo, $header_text = false, $total = 1
 		$url        = sprintf( 'http://github.com/%s', $contributor->login );
 		$avatar_url = add_query_arg( 's', 280, $contributor->avatar_url );
 		$avatar_url = add_query_arg( 'd', esc_url_raw( 'https://secure.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=280' ), $avatar_url );
-		$out[]      = sprintf( '<li><a title="%1s" href="%2s"><img class="avatar" src="%3s" /></a></li>', esc_attr( $title ), esc_url( $url ), esc_url( $avatar_url ) );
+		$out[]      = sprintf( '<li class="contributor-'.$contributor->login.'"><a title="%1s" href="%2s"><img class="avatar" src="%3s" /></a></li>', esc_attr( $title ), esc_url( $url ), esc_url( $avatar_url ) );
 	}
 	$out[] = '</ul><!-- #team -->
 			</div><!-- .wrap -->
