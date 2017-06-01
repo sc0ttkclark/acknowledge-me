@@ -1,10 +1,10 @@
 === Acknowledge Me ===
-Contributors: Shelob9
+Contributors: Shelob9, sc0ttkclark
 Tags: github, contributors, acknowledgment, pods
-Donate link: http://pods.io
-Requires at least: 3.8.0
-Tested up to: 4.1
-Stable tag: 0.2.2
+Donate link: https://pods.io/friends-of-pods/
+Requires at least: 3.8.
+Tested up to: 4.8
+Stable tag: 0.2.3
 License: GPL v2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -37,9 +37,9 @@ No. This isn't something the GitHub API supports.
 1. Example
 
 == Changelog ==
-= Version 1 January 11, 2015 =
-Initial version.
+= 0.2.3 - June XXth, 2017  =
+* Add contributor classes based on contributor login
+* Fix output escaping for display
 
-== Upgrade Notice ==
-= Version 1 January 11, 2015 =
+= 1.0 - January 11th, 2015 =
 Initial version.
