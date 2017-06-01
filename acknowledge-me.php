@@ -39,17 +39,17 @@ function acknowledge_me_display( $owner, $repo, $header_text = false, $total = 1
 			<div class="wrap">';
 
 	if ( is_string( $header_text ) ) {
-		$out[] = sprintf( '<div id="header-text">%1s</div>', $header_text );
+		$out[] = sprintf( '<div id="header-text">%1s</div>', wp_kses_post( $header_text ) );
 	}
 
 	$out[] = '<ul id="team">';
 	foreach ( $contributors as $contributor ) {
 
-		$title      = sprintf( '@%s with %d %s', $contributor->login, $contributor->contributions, _n( 'contribution', 'contributions', $contributor->contributions ) );
+		$title      = sprintf( '@%s with %d %s', esc_html( $contributor->login ), absint( $contributor->contributions ), esc_html( _n( 'contribution', 'contributions', $contributor->contributions ) ) );
 		$url        = sprintf( 'http://github.com/%s', $contributor->login );
 		$avatar_url = add_query_arg( 's', 280, $contributor->avatar_url );
 		$avatar_url = add_query_arg( 'd', esc_url_raw( 'https://secure.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=280' ), $avatar_url );
-		$out[]      = sprintf( '<li class="contributor-'.$contributor->login.'"><a title="%1s" href="%2s"><img class="avatar" src="%3s" /></a></li>', esc_attr( $title ), esc_url( $url ), esc_url( $avatar_url ) );
+		$out[]      = sprintf( '<li class="contributor-%1s"><a title="%2s" href="%3s"><img class="avatar" src="%4s" /></a></li>', esc_attr( $contributor->login ), esc_attr( $title ), esc_url( $url ), esc_url( $avatar_url ) );
 	}
 	$out[] = '</ul><!-- #team -->
 			</div><!-- .wrap -->
@@ -57,7 +57,6 @@ function acknowledge_me_display( $owner, $repo, $header_text = false, $total = 1
 
 	if ( is_array( $out ) ) {
 		return implode( '', $out );
-
 	}
 
 }
